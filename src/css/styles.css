@@ -16,3 +16,78 @@
 @import url('./badges.css');
 @import url('./back-link.css');
 @import url('./footer.css');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 16px;
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 16px;
+  background-color: #fafafa;
+  color: #2E2F42;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+ul {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 24px;
+}
+
+/* li */
+.gallery-item {
+  display: list-item;
+}
+
+.gallery-item:hover {
+  cursor: pointer;
+}
+
+/* a */
+.gallery-link {
+  display: flex;
+}
+
+/* img */
+.gallery-image {
+  display: block;
+  max-width: 360px;
+}
+
+.modal {
+  width: 1112px;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal img {
+  align-self: center;
+  max-width: 1112px;
+  max-height: 640px;
+}
