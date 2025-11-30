@@ -1,2 +1,2 @@
-import"./assets/styles-DD3qoKza.js";console.log("Hello");
+import"./assets/modulepreload-polyfill-B5Qt9EMX.js";/* empty css                      */const a={email:"",message:""},o="feedback-form-state",m=document.querySelector(".feedback-form"),l=document.querySelector(".form-email"),r=document.querySelector(".form-message");s();function s(){console.log("Hello!");const e=localStorage.getItem(o),t=JSON.parse(e);t&&(l.value=t.email,r.value=t.message)}m.addEventListener("input",e=>{e.target.name==="email"?a.email=e.target.value:a.message=e.target.value,localStorage.setItem(o,JSON.stringify(a))});m.addEventListener("submit",e=>{e.target.name});
 //# sourceMappingURL=2-form.js.map
