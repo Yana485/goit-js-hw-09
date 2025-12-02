@@ -9,7 +9,7 @@ formData та записуй цей об’єкт у локальне схови
 очисти локальне сховище, об’єкт formData і поля форми.*/
 /*На що буде звертати увагу ментор при перевірці:
 На живій сторінці відображається форма з двома елементами форми і кнопкою типу submit Форма стилізована згідно з макетом
-На формі прослуховуються події input і submit При введенні даних у будь-який елемент форми вони записуються у локальне сховище під ключем 
+На формі прослуховуються події input і submit. При введенні даних у будь-який елемент форми вони записуються у локальне сховище під ключем 
 "feedback-form-state", збережені дані не містять пробіли по краях Введення даних в одне поле форми не видаляє дані в сховищі для іншого
 При оновленні сторінки дані з локального сховища підставляються в елементи форми, у полях форми відсутні undefined
 При сабміті форми є перевірка, щоб обидва елементи форми були заповнені Під час сабміту форми, якщо обидва елементи форми заповнені, 
@@ -19,35 +19,49 @@ const formData = { email: "", message: "" };
 const localStorageKey = "feedback-form-state";
 
 const form = document.querySelector(".feedback-form");
-const email = document.querySelector(".form-email");
-const textarea = document.querySelector(".form-message");
-populateTextarea();
-function populateTextarea() {
-    console.log('Hello!');
-    const smth = localStorage.getItem(localStorageKey);
-    const savedValues = JSON.parse(smth);
-    //перевірити що об'єкт не пустий
-    if (savedValues) {
+const email = form.querySelector("input");
+const textarea = form.querySelector("textarea");
+
+const savedValues = JSON.parse(localStorage.getItem(localStorageKey));
+//перевірити що об'єкт не пустий
+if (savedValues !== null) {
+    if (savedValues.email !== null || savedValues.message !== null) {
         email.value = savedValues.email;
         textarea.value = savedValues.message;
     }
+    else {
+        localStorage.setItem(localStorageKey, JSON.stringify(formData));
+    }
 }
 
-
 form.addEventListener("input", (event) => {
+    const savedValues = JSON.parse(localStorage.getItem(localStorageKey));
     if (event.target.name === 'email') {
-        formData.email = event.target.value;
+        formData.email = event.target.value.trim();
+        formData.message = savedValues === null ? "" : savedValues.message;
     }
     else
     {
-        formData.message = event.target.value;
+        formData.email = savedValues === null ? "" : savedValues.email;
+        formData.message = event.target.value.trim();
     }
     localStorage.setItem(localStorageKey, JSON.stringify(formData));
 });
 
 form.addEventListener("submit", (event) => {
+    event.preventDefault();
     //якщо поля порожні, вивести алерт
-    if (event.target.name === 'email') {
-        //алерт
+    if (!formData.email || !formData.message) {
+        alert("Fill please all fields");
+    }
+    else {
+        /*Якщо всі поля заповнені, виведи у консоль об'єкт formData з актуальними значеннями, 
+        очисти локальне сховище, об'єкт formData і поля форми*/
+        console.log(formData);
+        localStorage.clear();
+        formData.email = "";
+        formData.message = "";
+        email.value = "";
+        textarea.value = "";
     }
 });
