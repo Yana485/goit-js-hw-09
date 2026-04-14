@@ -28,6 +28,8 @@ if (savedValues !== null) {
     if (savedValues.email !== null || savedValues.message !== null) {
         email.value = savedValues.email;
         textarea.value = savedValues.message;
+        formData.email = savedValues.email;
+        formData.message = savedValues.message;
     }
     else {
         localStorage.setItem(localStorageKey, JSON.stringify(formData));
@@ -58,7 +60,7 @@ form.addEventListener("submit", (event) => {
         /*Якщо всі поля заповнені, виведи у консоль об'єкт formData з актуальними значеннями, 
         очисти локальне сховище, об'єкт formData і поля форми*/
         console.log(formData);
-        localStorage.clear();
+        localStorage.removeItem(localStorageKey);
         formData.email = "";
         formData.message = "";
         email.value = "";
