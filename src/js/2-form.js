@@ -25,26 +25,18 @@ const textarea = form.querySelector("textarea");
 const savedValues = JSON.parse(localStorage.getItem(localStorageKey));
 //перевірити що об'єкт не пустий
 if (savedValues !== null) {
-    if (savedValues.email !== null || savedValues.message !== null) {
         email.value = savedValues.email;
         textarea.value = savedValues.message;
         formData.email = savedValues.email;
         formData.message = savedValues.message;
-    }
-    else {
-        localStorage.setItem(localStorageKey, JSON.stringify(formData));
-    }
 }
-
+    
 form.addEventListener("input", (event) => {
-    const savedValues = JSON.parse(localStorage.getItem(localStorageKey));
     if (event.target.name === 'email') {
         formData.email = event.target.value.trim();
-        formData.message = savedValues === null ? "" : savedValues.message;
     }
     else
     {
-        formData.email = savedValues === null ? "" : savedValues.email;
         formData.message = event.target.value.trim();
     }
     localStorage.setItem(localStorageKey, JSON.stringify(formData));
